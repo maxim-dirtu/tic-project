@@ -1,12 +1,12 @@
 <template>
-  <div>
-    <h1>Grocery List Manager</h1>
-    <a href="/about">About</a>
-    <a href="/">Home</a>
+  <Navbar />
+  <div class="bg-slate-900">
+  <RouterView />
   </div>
-  <RouterView/>
 </template>
 
-<script setup></script>
+<script setup>
+import Navbar from "./components/layout/NavBar.vue";
+</script>
 
 <style scoped></style>
