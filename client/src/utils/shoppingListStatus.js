@@ -1,9 +1,9 @@
 function getShoppingListStatus(statusCode) {
     switch(statusCode) {
-        case 1:
-            return "in progress";
-        case 2:
-            return "completed";
+        case false:
+            return "In Progress";
+        case true:
+            return "Completed";
         default:
             return "unknown status";
     }

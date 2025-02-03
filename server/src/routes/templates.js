@@ -1,6 +1,6 @@
-import express from "express";
-import db from "../config/firestore.js";
-import { doc, getDoc, collection, addDoc, updateDoc, deleteDoc } from "firebase/firestore";
+const express = require("express");
+const db = require("../config/firestore.js");
+const { doc, getDoc, collection, addDoc, updateDoc, deleteDoc } = require("firebase/firestore");
 
 const router = express.Router();
 
@@ -53,4 +53,4 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;

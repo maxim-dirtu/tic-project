@@ -6,11 +6,9 @@
       </router-link>
       <span class="text-lg font-semibold">Grocery List Manager</span>
     </div>
-    <div class="flex space-x-4">
+    <div class="flex space-x-8">
       <template v-if="isLoggedIn">
-        <router-link to="/profile" class="hover:text-gray-400">Profile</router-link>
-        <router-link to="/history" class="hover:text-gray-400">History</router-link>
-        <router-link to="/list-templates" class="hover:text-gray-400">List Templates</router-link>
+        <router-link to="/history" class="hover:text-gray-400">List History</router-link>
         <button @click="handleLogout" class="hover:text-gray-400">Log out</button>
       </template>
       <template v-else>
