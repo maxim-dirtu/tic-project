@@ -38,7 +38,7 @@
     </div>
 
     <!-- Actual list -->
-    <div class="flex flex-row gap-5 p-2">
+    <div class="flex flex-row flex-wrap gap-5 p-2">
       <div v-for="list in shoppingLists" :key="list.id">
         <ShoppingListCard :listItem="list" @list-deleted="handleListDeleted" @list-completed="handleListCompleted"/>
       </div>

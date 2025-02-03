@@ -4,12 +4,36 @@ const { doc, getDoc, getDocs, collection, addDoc, updateDoc, deleteDoc, Timestam
 const router = express.Router();
 
 
-// Fetch all Shopping lists for a certain person
+// Fetch all Shopping lists in pending status for a certain person
 router.get("/user/:userId", async (req, res) => {
   try {
     const userId = req.params.userId;
     const listsRef = db.collection("shoppingLists"); 
     const querySnapshot = await listsRef.where("id_user", "==", userId).where("status", "==", false).get(); 
+
+    if (querySnapshot.empty) {
+      return res.status(200).json([]); 
+    }
+
+    const lists = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+    console.log("Lists fetched from Firestore:", lists);
+    res.status(200).json(lists);
+  } catch (error) {
+    console.error("Error fetching shopping lists:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+//Fetch all shopping lists in finished status for a certain person
+router.get("/user/:userId/finished", async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const listsRef = db.collection("shoppingLists"); 
+    const querySnapshot = await listsRef.where("id_user", "==", userId).where("status", "==", true).get(); 
 
     if (querySnapshot.empty) {
       return res.status(200).json([]); 

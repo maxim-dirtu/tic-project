@@ -4,8 +4,14 @@
       <h2 class="text-xl font-bold mb-4">{{ listItem?.name }}</h2>
 
       <div>
+         <!-- Invite person button -->
+        <button
+          class="flex px-1 py-1 bg-yellow-500 text-white rounded w-32 self-center mb-2 hover:bg-yellow-600 ml-auto justify-center"
+        >
+          Invite Person
+        </button>
         <!-- add item button -->
-        <button class="flex px-2 py-1 bg-blue-500 text-white rounded w-24 self-center mb-4 hover:bg-blue-600 ml-auto justify-center" @click="showAddItemModal = true">Add item</button>
+        <button class="flex px-2 py-1 bg-blue-500 text-white rounded w-32 self-center mb-4 hover:bg-blue-600 ml-auto justify-center" @click="showAddItemModal = true">Add item</button>
       </div>
 
       <ul>

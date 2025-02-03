@@ -1,6 +1,6 @@
 <template>
   <div class="w-fill flex flex-col justify-center items-center mt-24">
-    <h2 class="m-4">Log Into Account</h2>
+    <h2 class="m-4 text-white text-2xl">Log Into Account</h2>
     <div class="flex flex-col items-center space-y-4 p-4 bg-gray-100 w-[350px] border border-gray-00 rounded">
       <form class="flex flex-col w-full space-y-4" @submit.prevent="handleLogin">
         <label class="flex flex-row justify-between items-baseline">

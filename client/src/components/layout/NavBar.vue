@@ -8,7 +8,7 @@
     </div>
     <div class="flex space-x-8">
       <template v-if="isLoggedIn">
-        <router-link to="/history" class="hover:text-gray-400">List History</router-link>
+        <router-link to="/listHistory" class="hover:text-gray-400">List History</router-link>
         <button @click="handleLogout" class="hover:text-gray-400">Log out</button>
       </template>
       <template v-else>

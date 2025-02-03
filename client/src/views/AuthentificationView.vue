@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="h-screen w-full p-4 ">
           <div v-if="currentForm === 'login'">
             <LoginForm @switchForm="switchForm" />
         </div>
