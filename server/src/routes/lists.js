@@ -115,4 +115,46 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+// SHARED LISTS
+
+//add another user to a shopping list by email
+router.put("/:id/addUser", async (req, res) => {
+  try {
+    const listRef = db.collection("shoppingLists").doc(req.params.id);
+    const listSnap = await listRef.get();
+    if (!listSnap.exists) {
+      return res.status(404).json({ message: "Shopping list not found" });
+    }
+    const listData = listSnap.data();
+    const invited_users = listData.invited_users;
+    invited_users.push(req.body.email);
+    await listRef.update({ invited_users: invited_users });
+    res.status(200).json({ message: "User added successfully" });
+  } catch (error) {
+    console.error("Error adding user to shopping list:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+//get all the lists where the email is in the invited users and the list has status false
+router.get("/user/:email/shared", async (req, res) => {
+  try {
+    const email = req.params.email;
+    const listsRef = db.collection("shoppingLists");
+    const querySnapshot = await listsRef.where("invited_users", "array-contains", email).where("status", "==", false).get();
+    if (querySnapshot.empty) {
+      return res.status(200).json([]);
+    }
+    const lists = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    console.log("Lists fetched from Firestore:", lists);
+    res.status(200).json(lists);
+  } catch (error) {
+    console.error("Error fetching shopping lists:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
 module.exports = router;

@@ -1,6 +1,6 @@
 <template>
   <Navbar />
-  <div class="bg-slate-900">
+  <div class="bg-slate-900 ">
   <RouterView />
   </div>
 </template>

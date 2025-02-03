@@ -4,12 +4,8 @@
       <h2 class="text-xl font-bold mb-4">{{ listItem?.name }}</h2>
 
       <div>
-         <!-- Invite person button -->
-        <button
-          class="flex px-1 py-1 bg-yellow-500 text-white rounded w-32 self-center mb-2 hover:bg-yellow-600 ml-auto justify-center"
-        >
-          Invite Person
-        </button>
+        <!-- Invite person button -->
+        <button class="flex px-1 py-1 bg-yellow-500 text-white rounded w-32 self-center mb-2 hover:bg-yellow-600 ml-auto justify-center" @click="showInviteUserModal = true">Invite Person</button>
         <!-- add item button -->
         <button class="flex px-2 py-1 bg-blue-500 text-white rounded w-32 self-center mb-4 hover:bg-blue-600 ml-auto justify-center" @click="showAddItemModal = true">Add item</button>
       </div>
@@ -47,6 +43,8 @@
       </div>
     </div>
     <AddItemModal v-if="showAddItemModal" :listId="props.listId" @close="showAddItemModal = false" @item-added="fetchItems" />
+    <!-- Invite User Modal -->
+    <InviteUserModal v-if="showInviteUserModal" :listId="props.listId" @close="showInviteUserModal = false" />
   </div>
 </template>
 
@@ -54,6 +52,7 @@
 import { ref, onMounted, watch, defineEmits } from "vue";
 import axios from "axios";
 import AddItemModal from "./AddItemModal.vue";
+import InviteUserModal from "./InviteUserModal.vue";
 
 const props = defineProps({
   listItem: {
@@ -70,6 +69,7 @@ const emit = defineEmits(["list-deleted", "list-completed"]);
 
 const listItem = ref(null);
 const showAddItemModal = ref(false);
+const showInviteUserModal = ref(false);
 
 // Fetch the list data when the modal is opened
 const fetchList = async () => {
@@ -113,7 +113,6 @@ const fetchItems = async () => {
     listItem.value.items = data; // Assign fetched data to listItem
   } catch (error) {
     console.error("Error fetching list items:", error);
-    alert("Failed to load the list items. Please try again.");
   }
 };
 
